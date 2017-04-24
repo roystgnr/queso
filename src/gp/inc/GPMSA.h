@@ -349,7 +349,10 @@ public:
   std::vector<typename SharedPtr<V>::Type> m_experimentScenarios;
   std::vector<typename SharedPtr<V>::Type> m_experimentOutputs;
 
-  // We will be recentering data around the simulation output mean
+  // We will be recentering data around the simulation output mean.
+  //
+  // For efficiency, we save the means of the *normalized* outputs
+  // here.
   typename ScopedPtr<V>::Type simulationOutputMeans;
 
   std::vector<typename SharedPtr<V>::Type> m_discrepancyBases;
@@ -454,6 +457,8 @@ public:
   bool m_constructedGP;
 
   // Block diagonal matrix; sacrificing efficiency for clarity
+  //
+  // This stores entries in *normalized*, not physical, units
   typename SharedPtr<M>::Type m_observationErrorMatrix;
 
   //
