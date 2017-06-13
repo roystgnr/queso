@@ -300,6 +300,8 @@ private:
   std::string m_option_autoscaleMinMaxAll;
   std::string m_option_autoscaleMeanVarAll;
 
+  bool options_have_been_used;
+
   void checkOptions();
 };
 
