@@ -1186,7 +1186,11 @@ GPMSAFactory<V, M>::setUpHyperpriors()
     {
       this->truncationErrorPrecisionMin.reset(new V(this->oneDSpace->zeroVector()));
       this->truncationErrorPrecisionMax.reset(new V(this->oneDSpace->zeroVector()));
-      this->truncationErrorPrecisionMin->cwSet(-INFINITY);
+      this->m_truncationErrorPrecisionShapeVec.reset
+        (new V(this->truncationErrorPrecisionSpace->zeroVector()));
+      this->m_truncationErrorPrecisionScaleVec.reset
+        (new V(this->truncationErrorPrecisionSpace->zeroVector()));
+      this->truncationErrorPrecisionMin->cwSet(0);
       this->truncationErrorPrecisionMax->cwSet(INFINITY);
 
       this->truncationErrorPrecisionDomain.reset
@@ -1197,9 +1201,11 @@ GPMSAFactory<V, M>::setUpHyperpriors()
            *(this->truncationErrorPrecisionMax)));
 
       this->m_truncationErrorPrecision.reset
-        (new UniformVectorRV<V, M>
+        (new GammaVectorRV<V, M>
          ("",
-          *(this->truncationErrorPrecisionDomain)));
+          *(this->truncationErrorPrecisionDomain),
+          *(this->m_truncationErrorPrecisionShapeVec),
+          *(this->m_truncationErrorPrecisionScaleVec)));
     }
 
   // Emulator precision
