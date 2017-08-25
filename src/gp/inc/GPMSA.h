@@ -556,10 +556,6 @@ public:
   // normalized data.
   typename ScopedPtr<M>::Type m_TruncatedSVD_simulationOutputs;
 
-  // Discrepancy matrices, calculated from supplied discrepancy bases
-  // and normalized.
-  std::vector<M> m_discrepancyMatrices;
-
   // B matrix from Higdon et. al.
   //
   // Calculated from normalized discrepancy matrices and normalized
